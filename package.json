@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start": "nodemon server.js",
+    "compile:sass": "sass src/resources/scss/home.scss src/resources/css/home.css"
+  },
+  "dependencies": {
+    "@woocommerce/woocommerce-rest-api": "^1.0.1",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2"
+  }
+}
