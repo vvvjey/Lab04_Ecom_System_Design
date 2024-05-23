@@ -28,12 +28,13 @@ let webhookOrderCreate = async (req, res) => {
                         table_id: process.env.LARK_TABLE_ID || "tbljSPzHsyjOJKXw",
                     },
                     data: {
-                        "fields": {
+                        fields: {
                             "orderId": orderData.id,
                             "product": item.name,
                             "quantity": item.quantity,
                             "total": item.total,
-                            "status": "Pending"
+                            "status": "Pending",
+                            "price": item.price
                         }
                     },
                 }, lark.withUserAccessToken(process.env.AUTHORIZATION));
