@@ -33,7 +33,7 @@ let webhookOrderCreate = async (req, res) => {
                             "product": item.name,
                             "quantity": item.quantity,
                             "total": item.total,
-                            "status": "Pending",
+                            "status": "Processing",
                             "price": item.price
                         }
                     },
@@ -52,6 +52,16 @@ let webhookOrderCreate = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+let changeStatusOrder = async (req,res)=>{
+    try {
+        console.log("req body",req.body);
+        console.log("req param",req.params);
+        console.log("req query",req.query);
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+
+    }
+}
 let testLark = (req,res) => {
     try {
         console.log('abc')
@@ -63,5 +73,6 @@ let testLark = (req,res) => {
 }
 module.exports={
     webhookOrderCreate,
-    testLark
+    testLark,
+    changeStatusOrder
 }

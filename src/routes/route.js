@@ -18,6 +18,8 @@ let initWebRoutes = (app) => {
 
     router.post('/api/v1/webhook-order',orderController.webhookOrderCreate);
     router.post('/api/v1/larksuite',orderController.testLark);
+    router.post('/api/v1/change-status-order',orderController.changeStatusOrder);
+
     return app.use("/",router)
 }
 
