@@ -5,6 +5,9 @@ let router=express.Router();
 let initWebRoutes = (app) => {
 
     router.get('/',productController.renderHome);
+    router.get('/abc',(req,res)=>{
+        res.json("abc")
+    });
 
     // Api
     router.get('/api/v1/get-all-products',productController.getAllProductFromWoo);
