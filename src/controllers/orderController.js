@@ -16,7 +16,11 @@ let webhookOrderCreate = async (req, res) => {
 
         for (let item of orderData.line_items) {
             console.log('Processing line item:', item);
-
+            console.log('orderId',orderData.id," + ", typeof(orderData.id))
+            console.log('product',item.name," + ", typeof(item.name))
+            console.log('total',item.total," + ", typeof(item.total))
+            console.log('quantity',item.quantity," + ", typeof(item.quantity))
+            console.log('price',item.price," + ", typeof(item.price))
             try {
                 const response = await client.bitable.appTableRecord.create({
                     path: {
