@@ -28,6 +28,8 @@ let createNewProductFromWoo = async(req,res)=>{
         regular_price:req.body.price,
         description: req.body.description,
         short_description: req.body.short_description,
+        stock_quantity:req.body.stock_quantity,
+        manage_stock: true,
         categories: [
           {
             id: req.body.categories
@@ -80,6 +82,7 @@ let updateProduct = async(req,res)=>{
             regular_price:req.body.price,
             description: req.body.description,
             short_description: req.body.short_description,
+            stock_quantity:req.body.stock_quantity,
             categories: [
               {
                 id: 2

@@ -1,6 +1,10 @@
 <div class="product-container">
+    <div style="justify-content: center;
+    display: flex;
+    color: cornflowerblue;
+    font-size: 40px;">ECOEX ADMIN PANEL</div>
     <div class="product-heading">
-        <p class="product-heading-text">Product</p>
+        <p class="product-heading-text" >Product</p>
         <button class="product-heading-button">CREATE</button>
     </div>
 
@@ -66,6 +70,15 @@
                             class='modal-input'
                             placeholder='CategoryId of product'
                             name="categoriesId"
+                        ></input>
+                    </div>
+                     <div class='form-input'>
+                        <label>Stock</label>
+                        <input
+                            type='text'
+                            class='modal-input'
+                            placeholder='Stock of product'
+                            name="stock"
                         ></input>
                     </div>
                     <div class='form-input'>
@@ -135,6 +148,15 @@
                         ></input>
                     </div>
                     <div class='form-input'>
+                        <label>Stock</label>
+                        <input
+                            type='text'
+                            class='modal-input'
+                            placeholder='Stock of product'
+                            name="stock-update"
+                        ></input>
+                    </div>
+                    <div class='form-input'>
                         <label>Img source</label>
                         <input
                             type='text'
@@ -184,11 +206,12 @@
             success: function(response) {
                 if (response.errCode === 0) {
                     var product = response.data;
-
+                    console.log(product)
                     // Populate form inputs with product details
                     $('input[name="name-update"]').val(product.name);
                     $('input[name="price-update"]').val(product.price);
                     $('input[name="categoriesId-update"]').val(product.categories[0].id);
+                    $('input[name="stock-update"]').val(product.stock_quantity);
                     $('input[name="img_src-update"]').val(product.images[0].src);
                     $('textarea[name="description-update"]').val(product.description);
                     $('textarea[name="short_description-update"]').val(product.short_description);
@@ -216,6 +239,7 @@
             id: productId,
             name: $('input[name="name-update"]').val(),
             price: $('input[name="price-update"]').val(),
+            stock_quantity: $('input[name="stock-update"]').val(),
             description: $('textarea[name="description-update"]').val(),
             short_description: $('textarea[name="short_description-update"]').val(),
             categories: $('input[name="categoriesId-update"]').val(),
@@ -247,6 +271,7 @@
             description: $('textarea[name="description"]').val(),
             short_description: $('textarea[name="short_description"]').val(),
             categories: $('input[name="categoriesId"]').val(),
+            stock_quantity: $('input[name="stock"]').val(),
             img_src: $('input[name="img_src"]').val()
         };
         $.ajax({
