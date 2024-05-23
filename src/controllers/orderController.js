@@ -1,6 +1,13 @@
 const lark = require('@larksuiteoapi/node-sdk');
 require('dotenv').config()
-
+const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
+var api = new WooCommerceRestApi({
+    url: 'https://daugoiecoex.infinityfreeapp.com',
+    consumerKey: 'ck_aab60ca180bfbc19f4fb4e1d787def2db7fe91ec',
+    consumerSecret: 'cs_7aa3d0eba573dea5a16a2ae68fd6effab443866e',
+    version: "wc/v3"
+  });
+  
 const client = new lark.Client({
 	appId: 'cli_a6c413f70239902f',
 	appSecret: 'N0XyxAslf1zLBR7RyTzhzduT5AsSZhhN',
@@ -54,21 +61,27 @@ let webhookOrderCreate = async (req, res) => {
 };
 let changeStatusOrder = async (req,res)=>{
     try {
-        console.log("req body",req.body);
-        console.log("req param",req.params);
         console.log("req query",req.query);
+        const data = {
+            status: req.query.status
+          };
+        let responseWooCommerce = await api.put(`orders/${req.query.orderId}`, data)
+        res.status(200).json({ success: true, message: responseWooCommerce.data });
+
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
 
     }
 }
-let testLark = (req,res) => {
+let testLark = async (req, res) => {
     try {
-        console.log('abc')
+        
+        //   let responseWooCommerce = await api.put("orders/433", data)
 
+        // res.status(200).json({ success: true, message: "Order status updated successfully.", data: responseWooCommerce.data });
     } catch (error) {
-        res.status(500).json({ success: false, message: error });
-
+        console.error(error.config);
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 module.exports={
