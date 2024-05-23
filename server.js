@@ -4,6 +4,7 @@ const app = express()
 var bodyParser = require('body-parser');
 var initWebRoutes = require("./src/routes/route");
 const handlebars = require('express-handlebars');
+require('dotenv').config()
 
 
 // Template engine
@@ -18,14 +19,14 @@ app.set('views', path.join(__dirname,'src', 'resources','views'));
 app.use(express.static(__dirname + '/src/resources'));
 
 
-const port = 3000
+const port = 3000 
 app.use(bodyParser.urlencoded({
     extended: false
 }));
   app.use(bodyParser.json());
   initWebRoutes(app);
-console.log('hello')
+console.log('hello',process.env.PORT)
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.listen(port || process.env.PORT, () => {
+  console.log(`Example app listening on port ${port || process.env.PORT}`)
 })
