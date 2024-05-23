@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 }));
   app.use(bodyParser.json());
   initWebRoutes(app);
-
+console.log('hello')
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
