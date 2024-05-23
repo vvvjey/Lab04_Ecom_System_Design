@@ -15,6 +15,7 @@ let webhookOrderCreate = async (req, res) => {
         console.log('orderData:', orderData);
 
         for (let item of orderData.line_items) {
+            console.log('loop',item);
             await client.bitable.appTableRecord.create({
                 path: {
                     app_token: "MBIBbaiqna1IK5sHHw1lW3OogHe",
