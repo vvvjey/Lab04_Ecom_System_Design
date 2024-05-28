@@ -5,6 +5,12 @@ const WooCommerce = new WooCommerceRestApi({
     consumerSecret: 'cs_7aa3d0eba573dea5a16a2ae68fd6effab443866e',
     version: 'wc/v3'
   });
+  var FB = require('fb');
+  require('dotenv').config()
+  FB.setAccessToken(process.env.FB_ACCESS_TOKEN);
+  const { G4F } = require("g4f");
+  const g4f = new G4F();
+
 
 let renderHome = async(req,res)=>{
     let data = await getAllProductFromWoo();
@@ -150,6 +156,22 @@ let webhookProductCreate = async(req,res)=>{
         let priceProduct = req.body.price;
         console.log('nameProduct',nameProduct)
         console.log('productData:', productData);
+        
+        const messages = [
+            { role: "user", content: `Công ty tôi là công ty về bán dầu gội thảo dược , sản phẩm mới là ${nameProduct} với lời mô tả là ${descriptionProduct} , là một nhân viên marketing , hãy viết cho tôi nội dung bài đăng mới lên facebook để quảng cáo sản phẩm mới này .`}
+        ];
+        let apiMessage = await g4f.chatCompletion(messages)
+
+        var body = 'My first post using facebook-node-sdk';
+        let response = await FB.api('me/photos', 'post', { url: linkProduct, caption: apiMessage }, function (res) {
+            if(!res || res.error) {
+              console.log(!res ? 'error occurred' : res.error);
+              return;
+            }
+            console.log('Post Id: ' + res.post_id);
+        });
+
+
         res.status(200).json({ success: 'success', message: productData });
 
     } catch (error) {

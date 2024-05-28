@@ -76,13 +76,24 @@ let changeStatusOrder = async (req,res)=>{
 
     }
 }
+var FB = require('fb');
+FB.setAccessToken();
 let testLark = async (req, res) => {
     try {
-        const messages = [
-            { role: "user", content: "Viết cho tôi một content về sản phẩm dầu gội thảo dược trắc bá diệp"}
-        ];
-        let a = await g4f.chatCompletion(messages)
-        return res.status(200).json({mess:a});
+        // const messages = [
+        //     { role: "user", content: "Viết cho tôi một content về sản phẩm dầu gội thảo dược trắc bá diệp"}
+        // ];
+        // let a = await g4f.chatCompletion(messages)
+        // return res.status(200).json({mess:a});
+        var body = 'My first post using facebook-node-sdk';
+        FB.api('me/photos', 'post', { url: "https://www.facebook.com/images/fb_icon_325x325.png", caption: 'My vacation' }, function (res) {
+            if(!res || res.error) {
+              console.log(!res ? 'error occurred' : res.error);
+              return;
+            }
+            console.log('Post Id: ' + res.post_id);
+          });
+           
     } catch (error) {
         console.error(error.config);
         res.status(500).json({ success: false, message: error.message });
