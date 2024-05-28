@@ -142,6 +142,8 @@ let webhookProductCreate = async(req,res)=>{
     try {
         const productData = req.body;
         console.log('productData:', productData);
+        res.status(200).json({ success: 'success', message: productData });
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: error.message });
