@@ -154,6 +154,7 @@ let webhookProductCreate = async(req,res)=>{
         let descriptionProduct = req.body.description;
         let shortDescriptionProduct = req.body.short_description;
         let priceProduct = req.body.price;
+        let imProduct = req.body.images[0].src;
         console.log('nameProduct',nameProduct)
         console.log('productData:', productData);
         
@@ -162,7 +163,7 @@ let webhookProductCreate = async(req,res)=>{
         ];
         let apiMessage = await g4f.chatCompletion(messages)
         console.log(2)
-        let response = await FB.api('me/photos', 'post', { url: linkProduct, caption: apiMessage }, function (res) {
+        let response = await FB.api('me/photos', 'post', { url: imProduct, caption: apiMessage }, function (res) {
             if(!res || res.error) {
               console.log(!res ? 'error occurred' : res.error);
               return;

@@ -86,7 +86,7 @@ let testLark = async (req, res) => {
         // let a = await g4f.chatCompletion(messages)
         // return res.status(200).json({mess:a});
         var body = 'My first post using facebook-node-sdk';
-        FB.api('me/photos', 'post', { url: "https://www.facebook.com/images/fb_icon_325x325.png", caption: 'My vacation' }, function (res) {
+        FB.api('me/photos', 'post', { url: "https://dranh.vn/wp-content/uploads/2023/07/dau-goi-thao-duoc-350ml-3.jpg", caption: 'My vacation' }, function (res) {
             if(!res || res.error) {
               console.log(!res ? 'error occurred' : res.error);
               return;
