@@ -143,6 +143,12 @@ let webhookProductCreate = async(req,res)=>{
         let webhookSecret = req.headers['x-webhook-secret'];
         console.log('secret:', webhookSecret);
         const productData = req.body;
+        let nameProduct = req.body.name;
+        let linkProduct = req.body.permalink;
+        let descriptionProduct = req.body.description;
+        let shortDescriptionProduct = req.body.short_description;
+        let priceProduct = req.body.price;
+        console.log('nameProduct',nameProduct)
         console.log('productData:', productData);
         res.status(200).json({ success: 'success', message: productData });
 
