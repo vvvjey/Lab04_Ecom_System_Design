@@ -140,6 +140,8 @@ let deleteProduct = async(req,res)=>{
 }
 let webhookProductCreate = async(req,res)=>{
     try {
+        let webhookSecret = req.headers['x-webhook-secret'];
+        console.log('secret:', webhookSecret);
         const productData = req.body;
         console.log('productData:', productData);
         res.status(200).json({ success: 'success', message: productData });
