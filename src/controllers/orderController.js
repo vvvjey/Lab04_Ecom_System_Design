@@ -77,7 +77,7 @@ let changeStatusOrder = async (req,res)=>{
     }
 }
 var FB = require('fb');
-FB.setAccessToken();
+FB.setAccessToken(process.env.FB_ACCESS_TOKEN);
 let testLark = async (req, res) => {
     try {
         // const messages = [
