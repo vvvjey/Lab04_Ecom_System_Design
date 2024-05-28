@@ -15,6 +15,9 @@ let initWebRoutes = (app) => {
     router.post('/api/v1/create-new-product',productController.createNewProductFromWoo);
     router.put('/api/v1/update-product',productController.updateProduct);
     router.delete('/api/v1/delete-product',productController.deleteProduct);
+    // Webhook
+    router.get('/api/v1/webhook-product-create',productController.webhookProductCreate);
+
 
     router.post('/api/v1/webhook-order',orderController.webhookOrderCreate);
     router.post('/api/v1/larksuite',orderController.testLark);

@@ -1,4 +1,7 @@
 const lark = require('@larksuiteoapi/node-sdk');
+const { G4F } = require("g4f");
+const g4f = new G4F();
+
 require('dotenv').config()
 const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
 var api = new WooCommerceRestApi({
@@ -75,10 +78,11 @@ let changeStatusOrder = async (req,res)=>{
 }
 let testLark = async (req, res) => {
     try {
-        
-        //   let responseWooCommerce = await api.put("orders/433", data)
-
-        // res.status(200).json({ success: true, message: "Order status updated successfully.", data: responseWooCommerce.data });
+        const messages = [
+            { role: "user", content: "Viết cho tôi một content về sản phẩm dầu gội thảo dược trắc bá diệp"}
+        ];
+        let a = await g4f.chatCompletion(messages)
+        return res.status(200).json({mess:a});
     } catch (error) {
         console.error(error.config);
         res.status(500).json({ success: false, message: error.message });
