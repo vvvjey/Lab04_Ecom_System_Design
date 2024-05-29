@@ -15,7 +15,8 @@ let handleCF7ToLarkSuite = async(req,res)=>{
                 fields: {
                     "message": req.body.message,
                     "name": req.body.name,
-                    "phoneNumber": req.body.phoneNumber
+                    "phoneNumber": req.body.phoneNumber,
+                    "email":req.body.email
                 }
             },
         }, lark.withUserAccessToken(process.env.AUTHORIZATION));
