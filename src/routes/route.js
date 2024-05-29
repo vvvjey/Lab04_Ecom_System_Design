@@ -1,6 +1,7 @@
 const express = require("express");
 const productController = require('../controllers/productController');
 const orderController = require('../controllers/orderController');
+const leadController = require('../controllers/leadController');
 let router=express.Router();
 let initWebRoutes = (app) => {
 
@@ -23,6 +24,10 @@ let initWebRoutes = (app) => {
     router.post('/api/v1/larksuite',orderController.testLark);
     router.post('/api/v1/change-status-order',orderController.changeStatusOrder);
 
+//  Leads
+    router.post('/api/v1/leads-to-larksuite',leadController.handleCF7ToLarkSuite);
+
+    
     return app.use("/",router)
 }
 
