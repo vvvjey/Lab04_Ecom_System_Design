@@ -1,5 +1,8 @@
 const lark = require('@larksuiteoapi/node-sdk');
-
+const client = new lark.Client({
+	appId: 'cli_a6c413f70239902f',
+	appSecret: 'N0XyxAslf1zLBR7RyTzhzduT5AsSZhhN',
+});
 let handleCF7ToLarkSuite = async(req,res)=>{
     try {
         console.log('req.body',req.body);
