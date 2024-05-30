@@ -85,37 +85,37 @@ let changeStatusOrder = async (req,res)=>{
             status: req.query.status
           };
         let responseWooCommerce = await api.put(`orders/${req.query.orderId}`, data)
-
+        console.log('2')
         const info = await transporter.sendMail({
             from: '"Ecoex 🍀" <hoangtu4520031234@gmail.com>', // sender address
             to: req.query.gmail, // list of receivers
             subject: `Cập nhật trạng thái đơn hàng ${req.query.orderId}`, // Subject line
             text: `Xin chào,
+            Đơn hàng của bạn với mã số ${req.query.orderId} đã được cập nhật trạng thái.
 
-Đơn hàng của bạn với mã số ${req.query.orderId} đã được cập nhật trạng thái.
+            Chi tiết đơn hàng:
+            - Mã đơn hàng: ${req.query.orderId}
+            - Tình trạng hiện tại: ${req.query.status}
 
-Chi tiết đơn hàng:
-- Mã đơn hàng: ${req.query.orderId}
-- Tình trạng hiện tại: ${req.query.status}
+            Cảm ơn bạn đã mua sắm tại Ecoex. Nếu bạn có bất kỳ thắc mắc nào, vui lòng liên hệ với chúng tôi qua email này hoặc gọi tới số hotline: [Số hotline].
 
-Cảm ơn bạn đã mua sắm tại Ecoex. Nếu bạn có bất kỳ thắc mắc nào, vui lòng liên hệ với chúng tôi qua email này hoặc gọi tới số hotline: [Số hotline].
-
-Trân trọng,
-Đội ngũ Ecoex 🍀`,
-    html: `
-        <p>Xin chào,</p>
-        <p>Đơn hàng của bạn với mã số <b>${req.query.orderId}</b> đã được cập nhật trạng thái.</p>
-        <h3>Chi tiết đơn hàng:</h3>
-        <ul>
-            <li><strong>Mã đơn hàng:</strong> ${req.query.orderId}</li>
-            <li><strong>Tình trạng hiện tại:</strong> ${req.query.status}</li>
-        </ul>
-        <p>Cảm ơn bạn đã mua sắm tại Ecoex. Nếu bạn có bất kỳ thắc mắc nào, vui lòng liên hệ với chúng tôi qua email này hoặc gọi tới số hotline: [Số hotline].</p>
-        <p>Trân trọng,<br>Đội ngũ Ecoex 🍀</p>
-    `
-          });
+            Trân trọng,
+            Đội ngũ Ecoex 🍀`,
+            html: `
+                <p>Xin chào,</p>
+                <p>Đơn hàng của bạn với mã số <b>${req.query.orderId}</b> đã được cập nhật trạng thái.</p>
+                <h3>Chi tiết đơn hàng:</h3>
+                <ul>
+                    <li><strong>Mã đơn hàng:</strong> ${req.query.orderId}</li>
+                    <li><strong>Tình trạng hiện tại:</strong> ${req.query.status}</li>
+                </ul>
+                <p>Cảm ơn bạn đã mua sắm tại Ecoex. Nếu bạn có bất kỳ thắc mắc nào, vui lòng liên hệ với chúng tôi qua email này hoặc gọi tới số hotline: [Số hotline].</p>
+                <p>Trân trọng,<br>Đội ngũ Ecoex 🍀</p>
+            `
+            });
         
           console.log("Message sent: %s", info.messageId);
+          console.log('3')
 
         res.status(200).json({ success: true, message: responseWooCommerce.data });
 
