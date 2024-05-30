@@ -42,9 +42,12 @@ let webhookOrderCreate = async (req, res) => {
                             "orderId": orderData.id,
                             "product": item.name,
                             "quantity": item.quantity,
-                            "total": item.total,
+                            "total": orderData.total,
                             "status": "Processing",
-                            "price": item.price
+                            "price": item.price,
+                            "address":item.address_1,
+                            "email":item.email,
+                            "phone":item.phone
                         }
                     },
                 }, lark.withUserAccessToken(process.env.AUTHORIZATION));

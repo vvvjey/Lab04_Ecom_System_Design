@@ -155,14 +155,10 @@ let webhookProductCreate = async(req,res)=>{
         let shortDescriptionProduct = req.body.short_description;
         let priceProduct = req.body.price;
         let imProduct = req.body.images[0].src;
-        console.log('nameProduct',nameProduct)
-        console.log('productData:', productData);
-        
         const messages = [
             { role: "user", content: `Công ty tôi là công ty về bán dầu gội thảo dược , sản phẩm mới là ${nameProduct} với lời mô tả là ${descriptionProduct} , là một nhân viên marketing , hãy viết cho tôi nội dung bài đăng mới lên facebook để quảng cáo sản phẩm mới này .`}
         ];
         let apiMessage = await g4f.chatCompletion(messages)
-        console.log(2)
         let response = await FB.api('me/photos', 'post', { url: imProduct, caption: apiMessage }, function (res) {
             if(!res || res.error) {
               console.log(!res ? 'error occurred' : res.error);
@@ -170,10 +166,7 @@ let webhookProductCreate = async(req,res)=>{
             }
             console.log('Post Id: ' + res.post_id);
         });
-
-        console.log('3',response)
-
-        res.status(200).json({ success: 'success', message: productData });
+        res.status(200).json({ success: 'success', message: response });
 
     } catch (error) {
         console.error('error',error);

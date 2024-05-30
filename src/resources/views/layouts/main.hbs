@@ -8,15 +8,69 @@
 
     <title>Document</title>
 </head>
+<style>
+    .active {
+    text-decoration: underline;
+    }
+
+    .inactive {
+        text-decoration: none;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
 <body>
     <div class="header">
-        <div class="header-navigator" style="text-decoration: underline;">
+        <a href="/" class="header-navigator" id="product">
             Product
-        </div>
-        <div class="header-navigator">
+        </a>
+        <a href="/voucher" class="header-navigator" id="voucher">
             Voucher
-        </div>
+        </a>
     </div>
     {{{body}}}
 </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const productElement = document.getElementById('product');
+        const voucherElement = document.getElementById('voucher');
+
+        function setActive(element) {
+            element.classList.add('active');
+            element.classList.remove('inactive');
+        }
+
+        function setInactive(element) {
+            element.classList.add('inactive');
+            element.classList.remove('active');
+        }
+
+        // Function to apply correct styles based on current URL
+        function updateStyles() {
+            const currentPath = window.location.pathname;
+            if (currentPath === '/voucher') {
+                setActive(voucherElement);
+                setInactive(productElement);
+            } else {
+                setActive(productElement);
+                setInactive(voucherElement);
+            }
+        }
+
+        // Apply styles on page load
+        updateStyles();
+
+        // Add event listeners for navigation
+        productElement.addEventListener('click', function() {
+            setActive(productElement);
+            setInactive(voucherElement);
+        });
+
+        voucherElement.addEventListener('click', function() {
+            setActive(voucherElement);
+            setInactive(productElement);
+        });
+    });
+</script>
