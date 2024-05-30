@@ -20,9 +20,7 @@ const client = new lark.Client({
 
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // Use `true` for port 465, `false` for all other ports
+    service: 'gmail',
     auth: {
       user: "hoangtu4520031234@gmail.com",
       pass: "gwgz qfzh onrm aepd",
@@ -114,13 +112,12 @@ let changeStatusOrder = async (req,res)=>{
             `
             });
         
-          console.log("Message sent: %s", info.messageId);
-          console.log('3')
+          console.log("Message sent: %s", info);
 
-        res.status(200).json({ success: true, message: responseWooCommerce.data });
+        res.status(200).json({ success: true, message: responseWooCommerce });
 
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+        res.status(500).json({ success: false, message: error });
 
     }
 }
