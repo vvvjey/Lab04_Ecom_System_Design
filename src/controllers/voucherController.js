@@ -55,7 +55,7 @@ let createVoucher = async(req,res)=>{
             });
 
             const messages = [
-                { role: "user", content: `Công ty tôi là công ty về bán dầu gội thảo dược,giờ tôi sẽ ra mắt coupon kỉ niệm ${req.body.description} hãy viết một bài quảng cáo lên facebook, đây là code : "${req.body.code}.` }
+                { role: "user", content: `Công ty tôi là công ty về bán dầu gội thảo dược,giờ tôi sẽ ra mắt coupon kỉ niệm ${req.body.description} hãy viết một bài quảng cáo lên facebook, đây là code : "${req.body.name}.` }
             ];
             let apiMessage = await g4f.chatCompletion(messages);
 
