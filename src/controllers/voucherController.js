@@ -5,6 +5,8 @@ const WooCommerce = new WooCommerceRestApi({
     consumerSecret: 'cs_7aa3d0eba573dea5a16a2ae68fd6effab443866e',
     version: 'wc/v3'
   });
+  var FB = require('fb');
+  FB.setAccessToken(process.env.FB_ACCESS_TOKEN);
 let renderVoucher = async(req,res)=>{
     try {
         let vouchers = await WooCommerce.get("coupons")
