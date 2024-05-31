@@ -42,13 +42,28 @@ let createVoucher = async(req,res)=>{
             description: req.body.description
           };
           
-          WooCommerce.post("coupons", data)
+          await WooCommerce.post("coupons", data)
             .then((response) => {
               console.log(response.data);
             })
             .catch((error) => {
               console.log(error.response.data);
             });
+
+            const messages = [
+                { role: "user", content: `Công ty tôi là công ty về bán dầu gội thảo dược,giờ tôi sẽ ra mắt coupon kỉ niệm ${req.body.description} hãy viết một bài quảng cáo lên facebook, đây là code : "${req.body.code}.` }
+            ];
+            let apiMessage = await g4f.chatCompletion(messages);
+
+            let response = await FB.api('me/feed', 'post', { message: apiMessage }, function (res) {
+                if (!res || res.error) {
+                    console.log(!res ? 'error occurred' : res.error);
+                    return;
+                }
+                console.log('Post Id: ' + res.post_id);
+            });
+            console.log(response)
+
             return res.status(200).json({message:"success",data:"ok"})
     } catch (error) {
         res.json({
